@@ -77,13 +77,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (commonConfig.getWorkspace().getMode() == WorkspaceMode.SAAS) {
             return Flux.empty();
         }
-        return organizationService.getOrganizationInEnterpriseMode()
-                .flatMapIterable(organization ->
-                        organization.getAuthConfigs()
-                                .stream()
-                                .map(abstractAuthConfig -> new FindAuthConfig(abstractAuthConfig, organization))
-                                .collect(Collectors.toList())
-                );
+        return this.findAllAuthConfigsForSaasMode();
     }
 
     private Flux<FindAuthConfig> findAllAuthConfigsForSaasMode() {

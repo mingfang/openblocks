@@ -3,6 +3,9 @@ package com.openblocks.api.authentication;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,6 +80,21 @@ public class AuthenticationController {
         return authenticationApiService.authenticateByOauth2(authId, source, code, redirectUrl)
                 .flatMap(authUser -> authenticationApiService.loginOrRegister(authUser, exchange, invitationId))
                 .thenReturn(ResponseView.success(true));
+    }
+
+    @GetMapping("/callback/tp/login/{authId}")
+    public Mono<Void> keycloakCallback(
+            @PathVariable("authId") String authId,
+            @RequestParam String code,
+            @RequestParam String session_state,
+            @RequestParam(required = false) String state,
+            ServerWebExchange exchange) {
+        ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(HttpStatus.SEE_OTHER);
+        response.getHeaders().add(HttpHeaders.LOCATION, state != null ? state : "/");
+        return authenticationApiService.authenticateByOauth2(authId, session_state, code, null)
+                .flatMap(authUser -> authenticationApiService.loginOrRegister(authUser, exchange, ""))
+                .then(response.setComplete());
     }
 
     @PostMapping("/logout")

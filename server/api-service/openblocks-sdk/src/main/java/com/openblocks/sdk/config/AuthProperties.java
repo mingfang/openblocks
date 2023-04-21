@@ -8,6 +8,7 @@ import static com.openblocks.sdk.constants.AuthSourceConstants.GOOGLE_NAME;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.openblocks.sdk.auth.KeycloakAuthConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class AuthProperties {
     private Email email = new Email();
     private Oauth2Simple google = new Oauth2Simple();
     private Oauth2Simple github = new Oauth2Simple();
+    private KeycloakAuthWay keycloak = new KeycloakAuthWay();
 
     @Getter
     @Setter
@@ -52,6 +54,14 @@ public class AuthProperties {
     public static class Oauth2Simple extends AuthWay {
         private String clientId;
         private String clientSecret;
+    }
+    @Setter
+    @Getter
+    public static class KeycloakAuthWay extends Oauth2Simple {
+        protected String issuerUri;
+        protected String accessTokenUri;
+        protected String userInfoUri;
+        protected String redirectUri;
     }
 
     /**
@@ -88,6 +98,23 @@ public class AuthProperties {
                     github.getClientSecret(),
                     AuthTypeConstants.GITHUB);
             authConfigs.add(githubConfig);
+        }
+        // keycloak
+        if (keycloak.isEnable()) {
+            KeycloakAuthConfig keycloakAuthConfig = new KeycloakAuthConfig(
+                    null,
+                    true,
+                    keycloak.isEnableRegister(),
+                    "keycloak",
+                    "Keycloak",
+                    keycloak.getClientId(),
+                    keycloak.getClientSecret(),
+                    keycloak.getIssuerUri(),
+                    keycloak.getAccessTokenUri(),
+                    keycloak.getUserInfoUri(),
+                    keycloak.getRedirectUri()
+            );
+            authConfigs.add(keycloakAuthConfig);
         }
         return authConfigs;
     }

@@ -5,6 +5,8 @@ import static com.openblocks.sdk.auth.constants.AuthTypeConstants.GOOGLE;
 
 import java.util.Set;
 
+import com.openblocks.api.authentication.request.oauth2.request.KeycloakRequest;
+import com.openblocks.sdk.auth.KeycloakAuthConfig;
 import org.springframework.stereotype.Component;
 
 import com.openblocks.api.authentication.request.AuthRequest;
@@ -15,6 +17,8 @@ import com.openblocks.api.authentication.request.oauth2.request.GoogleRequest;
 import com.openblocks.sdk.auth.Oauth2SimpleAuthConfig;
 
 import reactor.core.publisher.Mono;
+
+import static com.openblocks.sdk.auth.constants.AuthTypeConstants.*;
 
 @Component
 public class Oauth2AuthRequestFactory implements AuthRequestFactory<OAuth2RequestContext> {
@@ -28,6 +32,7 @@ public class Oauth2AuthRequestFactory implements AuthRequestFactory<OAuth2Reques
         return switch (context.getAuthConfig().getAuthType()) {
             case GITHUB -> new GithubRequest((Oauth2SimpleAuthConfig) context.getAuthConfig());
             case GOOGLE -> new GoogleRequest((Oauth2SimpleAuthConfig) context.getAuthConfig());
+            case KEYCLOAK -> new KeycloakRequest((KeycloakAuthConfig) context.getAuthConfig());
             default -> throw new UnsupportedOperationException(context.getAuthConfig().getAuthType());
         };
     }
@@ -36,6 +41,7 @@ public class Oauth2AuthRequestFactory implements AuthRequestFactory<OAuth2Reques
     public Set<String> supportedAuthTypes() {
         return Set.of(
                 GITHUB,
-                GOOGLE);
+                GOOGLE,
+                KEYCLOAK);
     }
 }

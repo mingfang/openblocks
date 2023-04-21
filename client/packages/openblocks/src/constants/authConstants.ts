@@ -74,7 +74,7 @@ export const AuthRoutes: Array<{ path: string; component: React.ComponentType<an
   { path: OAUTH_REDIRECT, component: AuthRedirect },
 ];
 
-export type ServerAuthType = "GOOGLE" | "GITHUB" | "FORM";
+export type ServerAuthType = "GOOGLE" | "GITHUB" | "FORM" | "KEYCLOAK";
 
 export type ServerAuthTypeInfoValueType = { logo: string; isOAuth2?: boolean };
 export const ServerAuthTypeInfo: { [key in ServerAuthType]?: ServerAuthTypeInfoValueType } = {
@@ -83,6 +83,7 @@ export const ServerAuthTypeInfo: { [key in ServerAuthType]?: ServerAuthTypeInfoV
     isOAuth2: true,
   },
   GITHUB: { logo: GithubLoginIcon, isOAuth2: true },
+  KEYCLOAK: { logo: GithubLoginIcon, isOAuth2: true },
   FORM: { logo: EmailLoginIcon },
 };
 
