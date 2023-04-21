@@ -2,6 +2,7 @@ package com.openblocks.api;
 
 import javax.annotation.PostConstruct;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +24,7 @@ import reactor.tools.agent.ReactorDebugAgent;
 @ComponentScan(basePackages = "com.openblocks.api.framework.configuration")
 @EnableScheduling
 @EnableConfigurationProperties
+@OpenAPIDefinition
 public class ServerApplication {
 
     @Autowired

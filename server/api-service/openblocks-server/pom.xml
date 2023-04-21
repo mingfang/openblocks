@@ -55,6 +55,11 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webflux-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
             <groupId>io.projectreactor.tools</groupId>
             <artifactId>blockhound</artifactId>
         </dependency>
@@ -151,6 +156,7 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>3.4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -179,6 +185,12 @@
             <artifactId>apacheds-test-framework</artifactId>
             <version>2.0.0.AM26</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mongock</groupId>
+            <artifactId>mongock-api</artifactId>
+            <version>5.2.4</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
