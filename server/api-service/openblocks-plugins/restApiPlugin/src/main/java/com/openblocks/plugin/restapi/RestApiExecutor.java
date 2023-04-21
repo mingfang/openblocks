@@ -45,9 +45,11 @@ import static org.apache.commons.lang3.StringUtils.trimToEmpty;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -63,7 +65,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.bson.internal.Base64;
 import org.pf4j.Extension;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
@@ -418,13 +419,13 @@ public class RestApiExecutor implements QueryExecutor<RestApiDatasourceConfig, O
 
         if (isPicture(contentType)) {
             return ResponseBodyData.builder()
-                    .body(Base64.encode(body))
+                    .body(Base64.getEncoder().encode(body))
                     .dataType(ResponseDataType.IMAGE)
                     .build();
         }
         if (isBinary(contentType)) {
             return ResponseBodyData.builder()
-                    .body(Base64.encode(body))
+                    .body(Base64.getEncoder().encode(body))
                     .dataType(ResponseDataType.BINARY)
                     .build();
         }

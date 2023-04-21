@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,6 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.bson.internal.Base64;
 import org.pf4j.Extension;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
@@ -427,13 +427,13 @@ public class GraphQLExecutor implements QueryExecutor<GraphQLDatasourceConfig, O
                 MediaType.IMAGE_JPEG.equals(contentType) ||
                 MediaType.IMAGE_PNG.equals(contentType)) {
             return ResponseBodyData.builder()
-                    .body(Base64.encode(body))
+                    .body(Base64.getEncoder().encode(body))
                     .dataType(ResponseDataType.IMAGE)
                     .build();
         }
         if (BINARY_DATA_TYPES.contains(contentType.toString())) {
             return ResponseBodyData.builder()
-                    .body(Base64.encode(body))
+                    .body(Base64.getEncoder().encode(body))
                     .dataType(ResponseDataType.BINARY)
                     .build();
         }

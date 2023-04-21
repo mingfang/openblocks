@@ -28,4 +28,9 @@ public class CustomApplicationRepositoryImpl implements CustomApplicationReposit
     public Mono<Application> findByIdWithDsl(String applicationId) {
         return reactiveMongoTemplate.findById(applicationId, Application.class);
     }
+
+    @Override
+    public Mono<Application> findByNameWithDsl(String name) {
+        return reactiveMongoTemplate.findOne(new Query(Criteria.where("name").is(name)), Application.class);
+    }
 }

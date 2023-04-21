@@ -38,11 +38,12 @@ public class HttpUtils {
     private static final CloseableHttpClient HTTP_CLIENT = HttpClients.createDefault();
 
     public static String request(HttpMethod method, String uri, Map<String, String> params, Map<String, String> headers, String jsonBody) {
-        return switch (method) {
-            case GET -> get(uri, params, headers);
-            case POST -> post(uri, params, headers, jsonBody);
-            default -> throw new IllegalStateException("Unexpected value: " + method);
-        };
+        if (method.equals(HttpMethod.GET)) {
+            return get(uri, params, headers);
+        } else if (method.equals(HttpMethod.POST)) {
+            return post(uri, params, headers, jsonBody);
+        }
+        throw new IllegalStateException("Unexpected value: " + method);
     }
 
     public static String get(String uri, Map<String, String> params, Map<String, String> headers) {

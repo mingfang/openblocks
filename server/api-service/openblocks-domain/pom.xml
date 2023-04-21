@@ -61,8 +61,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.cloudyrock.mongock</groupId>
-            <artifactId>mongock-spring-v5</artifactId>
+            <groupId>io.mongock</groupId>
+            <artifactId>mongock-springboot-v3</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -71,8 +71,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.github.cloudyrock.mongock</groupId>
-            <artifactId>mongodb-springdata-v3-driver</artifactId>
+            <groupId>io.mongock</groupId>
+            <artifactId>mongodb-springdata-v4-driver</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -86,6 +86,7 @@
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>3.4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -124,6 +125,10 @@
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-mongodb</artifactId>
             <exclusions>
+                <exclusion>
+                    <groupId>org.mongodb</groupId>
+                    <artifactId>mongo-java-driver</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>com.google.code.findbugs</groupId>
                     <artifactId>jsr305</artifactId>

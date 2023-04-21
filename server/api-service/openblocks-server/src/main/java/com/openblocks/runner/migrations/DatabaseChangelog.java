@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.index.IndexOperations;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
-import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
+import com.github.cloudyrock.mongock.driver.mongodb.springdata.v4.decorator.impl.MongockTemplate;
 import com.openblocks.domain.application.model.Application;
 import com.openblocks.domain.datasource.model.Datasource;
 import com.openblocks.domain.datasource.model.DatasourceStructureDO;

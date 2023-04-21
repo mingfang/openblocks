@@ -20,8 +20,9 @@ import org.springframework.data.mongodb.gridfs.ReactiveGridFsTemplate;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 
-import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.SpringDataMongoV3Driver;
-import com.github.cloudyrock.spring.v5.MongockSpring5;
+import io.mongock.driver.mongodb.springdata.v4.SpringDataMongoV4Driver;
+import io.mongock.runner.springboot.MongockSpringboot;
+import io.mongock.runner.springboot.base.MongockApplicationRunner;
 import com.mongodb.ReadConcern;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteConcern;
@@ -49,12 +50,12 @@ public class MongoConfig {
     }
 
     @Bean
-    public MongockSpring5.MongockApplicationRunner mongockApplicationRunner(ApplicationContext springContext, MongoTemplate mongoTemplate) {
-        SpringDataMongoV3Driver springDataMongoV3Driver = SpringDataMongoV3Driver.withDefaultLock(mongoTemplate);
+    public MongockApplicationRunner mongockApplicationRunner(ApplicationContext springContext, MongoTemplate mongoTemplate) {
+        SpringDataMongoV4Driver springDataMongoV3Driver = SpringDataMongoV4Driver.withDefaultLock(mongoTemplate);
         springDataMongoV3Driver.setWriteConcern(WriteConcern.JOURNALED.withJournal(false));
         springDataMongoV3Driver.setReadConcern(ReadConcern.LOCAL);
 
-        return MongockSpring5.builder()
+        return MongockSpringboot.builder()
                 .setDriver(springDataMongoV3Driver)
                 .addChangeLogsScanPackages(List.of("com.openblocks.runner.migrations"))
                 .setSpringContext(springContext)

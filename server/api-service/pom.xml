@@ -106,6 +106,26 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-core</artifactId>
+                <version>4.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>4.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-reactivestreams</artifactId>
+                <version>4.9.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>bson</artifactId>
+                <version>4.9.1</version>
+            </dependency>
+            <dependency>
                 <groupId>org.pf4j</groupId>
                 <artifactId>pf4j</artifactId>
                 <version>3.5.0</version>
@@ -247,9 +267,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.github.cloudyrock.mongock</groupId>
+                <groupId>io.mongock</groupId>
                 <artifactId>mongock-bom</artifactId>
-                <version>4.3.8</version>
+                <version>5.2.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

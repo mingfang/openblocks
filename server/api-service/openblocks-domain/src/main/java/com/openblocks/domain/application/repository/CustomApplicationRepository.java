@@ -10,4 +10,5 @@ public interface CustomApplicationRepository {
     Flux<Application> findByOrganizationIdWithDsl(String organizationId);
 
     Mono<Application> findByIdWithDsl(String applicationId);
+    Mono<Application> findByNameWithDsl(String name);
 }
