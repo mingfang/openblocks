@@ -96,6 +96,7 @@ export const CompStateIcon: {
   carousel: <LeftImage />,
   toggleButton: <LeftButton />,
   imageEditor: <LeftImage />,
+  mermaid: <LeftContainer />,
   collapsibleContainer: <LeftContainer />,
   npmPlugin: <LeftCommon />,
   calendar: <LeftDate />,
